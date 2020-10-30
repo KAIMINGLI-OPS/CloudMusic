@@ -9,3 +9,9 @@ export function Login(phone,password) {
         }
     })
 }
+export function logout()
+{
+    return request({
+        url:'logout',
+    })
+}

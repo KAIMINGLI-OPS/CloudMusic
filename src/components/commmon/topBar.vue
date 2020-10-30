@@ -1,10 +1,23 @@
 <template>
   <div id="app_topbar">
     <div id="left">
-        <img class="logo" :src="uaerimge" alt="">
-      <span class="aa" v-if="currentuserinfo">{{ currentuserinfo.nickname }}</span>
-      <el-button type="text" @click="dialogVisable = true" v-else
+      <img class="logo" :src="uaerimge" alt="" />
+      <span class="aa" style="color: white" v-if="currentuserinfo">{{
+        currentuserinfo.nickname
+      }}</span>
+      <el-button
+        style="color: white"
+        type="text"
+        @click="dialogVisable = true"
+        v-else
         >登录</el-button
+      >
+      <el-button
+        style="color: white"
+        type="text"
+        @click="getphonelogout"
+        v-if="currentuserinfo"
+        >退出</el-button
       >
       <el-dialog width="20%" title="请登录" :visible.sync="dialogVisable">
         <el-form v-bind="formData">
@@ -20,7 +33,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="success" @click="confirmLogin">登录</el-button>
-            <el-button type="danger">取消</el-button>
+            <el-button type="danger" @click="cancleLogin">取消</el-button>
           </el-form-item>
         </el-form>
       </el-dialog>
@@ -30,8 +43,9 @@
   </div>
 </template>
 <script>
-import { Login } from "../../network/login";
+import { Login, logout } from "../../network/login";
 export default {
+  name:"TopBar",
   data() {
     return {
       dialogVisable: false, //登录框
@@ -39,9 +53,16 @@ export default {
         password: "kzj2372966718",
         phone: "13479636407",
       },
-      currentuserinfo: "",
-      uaerimge:require("../../assets/img/logo.png")
+      currentuserinfo: window.localStorage.getItem("currentuseinfo"),
+      uaerimge: require("../../assets/img/logo.png"),
     };
+  },
+  created() {
+    
+    if (this.currentuserinfo) {
+       var curuser= JSON.parse(this.currentuserinfo);
+      this.uaerimge = curuser.avatarUrl;
+    }
   },
   methods: {
     messageShow(message, msgtype) {
@@ -49,6 +70,17 @@ export default {
         message: message,
         type: msgtype,
       });
+    },
+    getphonelogout() {
+      logout().then((res) => {
+        console.log(res);
+      });
+      this.currentuserinfo = null;
+      window.localStorage.setItem("currentuseinfo", "");
+      this.uaerimge = require("../../assets/img/logo.png");
+    },
+    cancleLogin() {
+      this.dialogVisable = false;
     },
     confirmLogin() {
       this.getPhoneLogin(this.formData.phone, this.formData.password);
@@ -59,14 +91,13 @@ export default {
         console.log(res);
         if (res === undefined) {
           this.dialogVisable = true;
-           this.messageShow("登录失败！","error");
-           return;
+          this.messageShow("登录失败！", "error");
+          return;
         }
-        if(res.code!==200)
-        {
-            this.dialogVisable=true;
-            this.messageShow(res.message,"success");
-            return;
+        if (res.code !== 200) {
+          this.dialogVisable = true;
+          this.messageShow(res.message, "success");
+          return;
         }
         //存储用户信息
         window.localStorage.setItem(
@@ -74,10 +105,10 @@ export default {
           JSON.stringify(res.profile)
         );
         this.currentuserinfo = res.profile;
-        this.messageShow("成功登录！","success");
-        this.uaerimge=res.profile.avatarUrl;
-        console.log(res.profile.avatarUrl);
-        this.dialogVisable=false;
+        this.messageShow("成功登录！", "success");
+        this.uaerimge = res.profile.avatarUrl;
+        //console.log(res.profile.avatarUrl);
+        this.dialogVisable = false;
       });
     },
   },
@@ -103,11 +134,9 @@ export default {
 #custom {
   width: 10px;
 }
-.logo{
-    width: 30px;
-    float: left;
-    border-radius: 50%;
+.logo {
+  width: 30px;
+  float: left;
+  border-radius: 50%;
 }
-
-
 </style>

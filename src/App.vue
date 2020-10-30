@@ -4,37 +4,35 @@
       <img src="./assets/img/bg.jpg" alt="">
     </div>
     <div id="app_content">
-      <topBar></topBar>
-      <centerAll></centerAll>
+      <TopBar></TopBar>
+      <CenterAll></CenterAll>
     </div>
   </div>
 </template>
 <script>
-import centerAll from './views/center/centerAll'
-import topBar from './components/commmon/topBar'
+import CenterAll from './views/center/centerAll'
+import TopBar from './components/commmon/topBar'
 export default {
   name: 'App',
   components: {
-    centerAll,
-    topBar
+    CenterAll,
+    TopBar
   }
 }
 </script>
 
 <style scoped>
-.{
-  margin: 0;
-  padding: 0;
-}
+
 img{
   width: 100%;
   filter:blur(80px);
 }
 #main {
-  width: 100%;
+  width: 1400PX;
   height: 500px;
   overflow: 100%;
   float: left;
+  margin: 0 auto;
 }
 .backImage{
   z-index: -1;
@@ -44,10 +42,11 @@ img{
   overflow: hidden;
 }
 #app_content{
+ 
   margin:100PX auto ;
   width: 1400PX;
-  height: 800PX;
-  background-color: black;
+  height: 600PX;
+  background-color: white;
 }
 
 </style>
