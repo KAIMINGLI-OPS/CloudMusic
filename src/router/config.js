@@ -42,6 +42,31 @@ export default {
         },
         
       ]
+    },
+    {
+      path:'/search:keywords',
+      name:'search',
+      component:()=>import('../components/commmon/search/search.vue')
+    },
+    {
+      path:'/songsdetail:id',
+      name:'songsdetail',
+      component:()=>import('../components/commmon/songsdetail.vue')
+    },
+    {
+      path:'/lyric:id',
+      name:'lyric',
+      component:()=>import('../components/commmon/lyric.vue')
+    },
+    {
+      path:'/comment:id',
+      name:'comment',
+      component:()=>import('../components/commmon/comment.vue')
+    },
+    {
+      path:'/radio',
+      name:'radio',
+      component:()=>import('../components/commmon/radioStation/radio.vue')
     }
   ]
 }

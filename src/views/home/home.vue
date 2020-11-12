@@ -26,7 +26,7 @@ export default {
     width: 1180px;
     height: 800px;
     background-color: violet;
-    
+    overflow: auto;
 }
 .right_top{
     

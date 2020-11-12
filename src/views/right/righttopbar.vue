@@ -42,5 +42,6 @@ export default {
 }
 #topbar {
   margin: 0 auto;
+  cursor: pointer
 }
 </style>

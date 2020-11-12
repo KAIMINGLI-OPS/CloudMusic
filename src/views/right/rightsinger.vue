@@ -82,6 +82,10 @@ export default {
       limit: 30,
     };
   },
+  created()
+  {
+      this.change();
+  },
   methods: {
     getsingerlist(id1, initial, area, limit) {
       console.log(id1, initial, area, limit);
@@ -89,6 +93,10 @@ export default {
         this.allsingers = res.artists;
          //console.log(res.artists);
       });
+    },
+    change()
+    {
+      this.getsingerlist(this.id1, this.initial, this.area, this.limit);
     },
     change1(item, index) {
       switch (item) {
@@ -154,6 +162,6 @@ export default {
 .singercards{
   margin-top: 30px;
   height: 600px;
-  overflow-y:auto;
+  
 }
 </style>

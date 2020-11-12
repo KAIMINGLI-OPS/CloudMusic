@@ -8,22 +8,28 @@
       <el-menu-item index="1">
           <template>
             <i class="el-icon-bangzhu"></i>
-          <span>发现音乐</span>
+          <span @click="tohome">发现音乐</span>
           </template>
       </el-menu-item>
       <el-menu-item index="2">
+          <template>
+            <i class="el-icon-mic"></i>
+          <span  @click="toradio">电台</span>
+          </template>
+      </el-menu-item>
+      <el-menu-item index="3">
           <template>
             <i class="el-icon-download"></i>
           <span>下载管理</span>
           </template>
       </el-menu-item>
-      <el-menu-item index="3">
+      <el-menu-item index="4">
           <template>
             <i class="el-icon-coin"></i>
           <span>我的云盘</span>
           </template>
       </el-menu-item>
-      <el-menu-item index="4">
+      <el-menu-item index="5">
           <template>
             <i class="el-icon-star-off"></i>
           <span>我的收藏</span>
@@ -34,7 +40,17 @@
 </template>
 <script>
 export default {
-    name:"Leftmenu"
+    name:"Leftmenu",
+    methods:{
+      tohome()
+      {
+        this.$router.push("/home/rightstyle");
+      },
+      toradio()
+      {
+        this.$router.push("/radio");
+      }
+    }
 }
 </script>
 <style scoped>

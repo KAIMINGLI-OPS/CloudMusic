@@ -6,6 +6,7 @@
         currentuserinfo.nickname
       }}</span>
       <el-button
+      class="login"
         style="color: white"
         type="text"
         @click="dialogVisable = true"
@@ -13,6 +14,7 @@
         >登录</el-button
       >
       <el-button
+      class="logout"
         style="color: white"
         type="text"
         @click="getphonelogout"
@@ -38,7 +40,13 @@
         </el-form>
       </el-dialog>
     </div>
-    <div id="middle"></div>
+    <div class="middle" >
+      <el-form v-bind="searchform">
+        <el-form-item>
+             <el-input v-model="searchform.input_text" placeholder="关键字" @keyup.enter.native="search"></el-input>
+        </el-form-item>
+      </el-form>
+    </div>
     <div id="right"></div>
   </div>
 </template>
@@ -53,6 +61,9 @@ export default {
         password: "kzj2372966718",
         phone: "13479636407",
       },
+      searchform:{
+        input_text:'',
+      },
       currentuserinfo: window.localStorage.getItem("currentuseinfo"),
       uaerimge: require("../../assets/img/logo.png"),
     };
@@ -65,6 +76,12 @@ export default {
     }
   },
   methods: {
+    search()
+    {
+      console.log(this.searchform.input_text);
+      if(this.searchform.input_text==="") return;
+      this.$router.push('/search'+this.searchform.input_text);
+    },
     messageShow(message, msgtype) {
       this.$message({
         message: message,
@@ -116,10 +133,12 @@ export default {
 </script>
 <style scoped>
 #app_topbar {
-  width: 100%;
+  width: 1380px;
   height: 120px;
   background-color: #f73131;
-  padding-top: 20px;
+  padding:60px 0px 0px 20px;
+  display: flex;
+  
 }
 #btn_login {
   color: white;
@@ -127,9 +146,16 @@ export default {
 #left {
   width: 100px;
   height: 40px;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
+}
+.logout{
+  margin-left: 10px;
+}
+.login{
+  margin-left: 10px;
+}
+.middle{
+  width:500px;
+  margin-left: 100px;
 }
 #custom {
   width: 10px;

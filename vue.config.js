@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 module.exports = {
     // publicPath: './',
     // outputDir:'dist',
@@ -10,8 +11,16 @@ module.exports = {
                 'components': '@/components',
                 'network': '@/network',
                 'views': '@/views',
+
             }
-        }
+        },
+        plugins: [
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery",
+                "windows.jQuery": "jquery"
+            })
+        ]
     },
     devServer: {
         proxy: {//解决跨域问题

@@ -6,17 +6,21 @@
     <div id="app_content">
       <TopBar></TopBar>
       <CenterAll></CenterAll>
+      <BottomBar ></BottomBar>
     </div>
   </div>
 </template>
 <script>
 import CenterAll from './views/center/centerAll'
 import TopBar from './components/commmon/topBar'
+import BottomBar from './components/commmon/BottomBar'
+
 export default {
   name: 'App',
   components: {
     CenterAll,
-    TopBar
+    TopBar,
+    BottomBar
   }
 }
 </script>
@@ -43,9 +47,10 @@ img{
 }
 #app_content{
  
-  margin:100PX auto ;
+ margin-left:200px ;
+ margin-top: 100px;
   width: 1400PX;
-  height: 600PX;
+  height: 1200PX;
   background-color: white;
 }
 

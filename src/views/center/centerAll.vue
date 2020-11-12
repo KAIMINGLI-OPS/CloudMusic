@@ -23,6 +23,7 @@ export default {
 #center{
   margin: 0;
   padding: 0;
+  height: 800px;
 }
 .asisde{
   height: 800px;
